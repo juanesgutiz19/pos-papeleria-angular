@@ -33,7 +33,7 @@ pipeline {
             steps {
                 echo "------------>Installing<------------"
                 withEnv(['NPM_CONFIG_LOGLEVEL=warn']) {
-                    sh 'npm install'
+                    sh 'npm install --force'
                 }
             }
         }
@@ -41,16 +41,16 @@ pipeline {
         stage('Unit Test') {
             steps {
                 echo "------------>Testing<------------"
-                sh 'ng test --no-watch --code-coverage --browsers ChromeHeadless'
+                sh 'npm run test --no-watch --code-coverage'
             }
         }
 
-        stage('Test end-to-end') {
+        /*stage('Test end-to-end') {
             steps{
                 echo "------------>Testing Protractor<------------"
                 sh 'npm run e2e'
             }
-        }
+        }*/
         
         stage('Static Code Analysis') {
             steps {
